@@ -201,7 +201,7 @@ def new_game(event=''):
     z = 0.03
     t1.live = 1
     t2.live = 1
-    while t1.live or balls or t2.live:
+    while (t1.live and t2.live) or balls:
         t1.move_target()
         t2.move_target()
         for b in balls:
@@ -212,7 +212,7 @@ def new_game(event=''):
                 canv.bind('<Button-1>', '')
                 canv.bind('<ButtonRelease-1>', '')
                 canv.itemconfig(screen1, text='Вы уничтожили цель за ' + str(bullet) + ' выстрелов')
-            if b.hittest(t2) and t2.live:
+            elif b.hittest(t2) and t2.live:
                 t2.live = 0
                 t2.hit()
                 canv.bind('<Button-1>', '')
